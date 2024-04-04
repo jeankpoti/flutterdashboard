@@ -3,7 +3,6 @@ import 'package:dashboard/constants/app_text_styles.dart';
 import 'package:dashboard/widgets/overview_widget.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'search_bar_widget.dart';
@@ -15,21 +14,73 @@ class BodyWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Widget bottomTitleWidgets(double value, TitleMeta meta) {
-      const style = TextStyle(
+      TextStyle style = TextStyle(
         fontWeight: FontWeight.bold,
-        fontSize: 16,
+        fontSize: 12.sp,
+        color: AppColors.bodyColor.withOpacity(0.5),
       );
       Widget text;
       switch (value.toInt()) {
+        case 1:
+          text = Padding(
+            padding: const EdgeInsets.only(left: 32.0),
+            child: Text('Jan 2024', style: style),
+          );
+          break;
         case 2:
-          text = const Text('SEPT', style: style);
+          text = Text('Feb 2024', style: style);
+          break;
+        case 3:
+          text = Text('Mar 2024', style: style);
+          break;
+        case 4:
+          text = Text('Apr 2024', style: style);
+          break;
+        case 5:
+          text = Text('May 2024', style: style);
+          break;
+        case 6:
+          text = Text('June 2024', style: style);
           break;
         case 7:
-          text = const Text('OCT', style: style);
+          text = Text('July 2024', style: style);
           break;
-        case 12:
-          text = const Text('DEC', style: style);
+        case 8:
+          text = Text('Aug 2024', style: style);
+        default:
+          text = const Text('');
           break;
+      }
+
+      return SideTitleWidget(
+        axisSide: meta.axisSide,
+        space: 10,
+        child: text,
+      );
+    }
+
+    Widget rightTitlesWidgets(double value, TitleMeta meta) {
+      TextStyle style = TextStyle(
+        fontWeight: FontWeight.bold,
+        fontSize: 12.sp,
+        color: AppColors.bodyColor.withOpacity(0.5),
+      );
+      Widget text;
+
+      print('value: $value  ${meta.axisSide} ');
+      switch (value.toInt()) {
+        case 1.9:
+          text = Text('\$0', style: style);
+          break;
+        case 2:
+          text = Text('\$0', style: style);
+          break;
+        case 3:
+          text = Text('\$10K', style: style);
+          break;
+
+        case 3.9:
+          text = Text('\$50K', style: style);
         default:
           text = const Text('');
           break;
@@ -141,7 +192,7 @@ class BodyWidget extends StatelessWidget {
                 ),
               ],
             ),
-            width: 600.w,
+            width: 750.w,
             child: Padding(
               padding: EdgeInsets.all(16.h),
               child: Column(
@@ -270,7 +321,7 @@ class BodyWidget extends StatelessWidget {
                   ),
                   SizedBox(height: 20.h),
                   SizedBox(
-                    width: 550.w,
+                    width: 700.w,
                     height: 200.h,
                     child: LineChart(
                       LineChartData(
@@ -287,23 +338,31 @@ class BodyWidget extends StatelessWidget {
                           rightTitles: AxisTitles(
                             sideTitles: SideTitles(
                               showTitles: true,
+                              reservedSize: 28,
+                              interval: 1,
+                              getTitlesWidget: rightTitlesWidgets,
                             ),
                           ),
-                          leftTitles: AxisTitles(
+                          leftTitles: const AxisTitles(
                             sideTitles: SideTitles(
                               showTitles: false,
                             ),
                           ),
-                          topTitles: AxisTitles(
+                          topTitles: const AxisTitles(
                             sideTitles: SideTitles(
                               showTitles: false,
                             ),
                           ),
                         ),
                         borderData: FlBorderData(
-                          border: const Border(
-                            bottom: BorderSide(color: Colors.black, width: 2),
-                            right: BorderSide(color: Colors.black, width: 2),
+                          border: Border(
+                            bottom: BorderSide(
+                                color: AppColors.bodyColor.withOpacity(0.2),
+                                width: 1),
+                            right: BorderSide(
+                              color: AppColors.bodyColor.withOpacity(0.2),
+                              width: 1,
+                            ),
                             top: BorderSide.none,
                             left: BorderSide.none,
                           ),
@@ -311,12 +370,14 @@ class BodyWidget extends StatelessWidget {
                         lineBarsData: [
                           LineChartBarData(
                             spots: [
-                              FlSpot(1, 1),
-                              FlSpot(3, 2.8),
-                              FlSpot(7, 1.2),
-                              FlSpot(10, 2.8),
-                              FlSpot(12, 2.6),
-                              FlSpot(13, 3.9),
+                              const FlSpot(1, 2),
+                              const FlSpot(2, 2.8),
+                              const FlSpot(3, 3.2),
+                              const FlSpot(4, 2.8),
+                              const FlSpot(5, 2.6),
+                              const FlSpot(6, 3.9),
+                              const FlSpot(7, 2.5),
+                              const FlSpot(8, 2.8),
                             ],
                             isCurved: false,
                             color: Colors.orange,
@@ -326,11 +387,16 @@ class BodyWidget extends StatelessWidget {
                             belowBarData: BarAreaData(show: false),
                           ),
                           LineChartBarData(
-                            // spots: [
-                            //   FlSpot(0, 0),
-                            //   FlSpot(1, 10000),
-                            //   FlSpot(2, 20000),
-                            // ],
+                            spots: [
+                              const FlSpot(1, 3),
+                              const FlSpot(2, 3.8),
+                              const FlSpot(3, 2.2),
+                              const FlSpot(4, 3.8),
+                              const FlSpot(5, 3.6),
+                              const FlSpot(6, 1.9),
+                              const FlSpot(7, 2),
+                              const FlSpot(8, 3.8),
+                            ],
                             isCurved: false,
                             color: AppColors.secondary,
                             barWidth: 2,
