@@ -11,7 +11,7 @@ class SalesByRegion extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(16.0),
+      padding: EdgeInsets.only(right: 16.h),
       child: Container(
         height: 350.h,
         decoration: BoxDecoration(
@@ -55,12 +55,12 @@ class SalesByRegion extends StatelessWidget {
                   dataSets: [
                     RadarDataSet(
                       dataEntries: [
-                        RadarEntry(value: 3),
-                        RadarEntry(value: 2),
-                        RadarEntry(value: 5),
-                        RadarEntry(value: 3),
-                        RadarEntry(value: 4),
-                        RadarEntry(value: 2),
+                        const RadarEntry(value: 3),
+                        const RadarEntry(value: 2),
+                        const RadarEntry(value: 5),
+                        const RadarEntry(value: 3),
+                        const RadarEntry(value: 4),
+                        const RadarEntry(value: 2),
                       ],
                     ),
                   ],

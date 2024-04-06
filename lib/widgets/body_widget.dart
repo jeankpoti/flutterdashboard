@@ -113,17 +113,17 @@ class BodyWidget extends StatelessWidget {
             ),
           ),
 
-          Padding(
-            padding: EdgeInsets.all(16.h),
-            child: Row(
-              children: [
-                // Revenue Over Time
-                const Expanded(flex: 7, child: RevenueOverTime()),
-                SizedBox(width: 16.w),
-                const Expanded(flex: 4, child: SessionByCountry()),
-              ],
-            ),
-          ),
+          // Padding(
+          //   padding: EdgeInsets.all(16.h),
+          //   child: Row(
+          //     children: [
+          //       // Revenue Over Time
+          //       const Expanded(flex: 7, child: RevenueOverTime()),
+          //       SizedBox(width: 16.w),
+          //       const Expanded(flex: 4, child: SessionByCountry()),
+          //     ],
+          //   ),
+          // ),
           Padding(
             padding: EdgeInsets.all(16.h),
             child: const Row(
