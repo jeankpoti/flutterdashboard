@@ -63,67 +63,78 @@ class BodyWidget extends StatelessWidget {
           ),
           Padding(
             padding: EdgeInsets.all(16.h),
+            child: SizedBox(
+              height: 150.h,
+              child: const StatisticWidget(
+                isPrice: true,
+                icon: Icons.arrow_upward_outlined,
+                color: AppColors.secondary,
+              ),
+            ),
+
+            //  Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //   children: [
+            //     const Expanded(
+            //       flex: 3,
+            //       child: StatisticWidget(
+            //         isPrice: true,
+            //         title: 'Total Revenue',
+            //         price: 32499.93,
+            //         percentage: '12,95%',
+            //         icon: Icons.arrow_upward_outlined,
+            //         color: AppColors.secondary,
+            //       ),
+            //     ),
+            //     SizedBox(width: 10.w),
+            //     const Expanded(
+            //       flex: 3,
+            //       child: StatisticWidget(
+            //         isPrice: true,
+            //         title: 'Profit',
+            //         price: 12499.93,
+            //         percentage: '0,33%',
+            //         icon: Icons.arrow_downward_outlined,
+            //         color: Colors.red,
+            //       ),
+            //     ),
+            //     SizedBox(width: 10.w),
+            //     const Expanded(
+            //       flex: 3,
+            //       child: StatisticWidget(
+            //         title: 'Total Views',
+            //         price: 5211832,
+            //         percentage: '0,32%',
+            //         icon: Icons.arrow_upward_outlined,
+            //         color: AppColors.secondary,
+            //       ),
+            //     ),
+            //     SizedBox(width: 10.w),
+            //     const Expanded(
+            //       flex: 3,
+            //       child: StatisticWidget(
+            //         title: 'Conversion Rate',
+            //         price: 4.83,
+            //         percentage: '8,05%',
+            //         icon: Icons.arrow_upward_outlined,
+            //         color: AppColors.secondary,
+            //       ),
+            //     ),
+            //   ],
+            // ),
+          ),
+
+          Padding(
+            padding: EdgeInsets.all(16.h),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Expanded(
-                  flex: 3,
-                  child: StatisticWidget(
-                    title: 'Total Revenue',
-                    price: '\$ 32,499.93',
-                    percentage: '12,95%',
-                    icon: Icons.arrow_upward_outlined,
-                    color: AppColors.secondary,
-                  ),
-                ),
-                SizedBox(width: 10.w),
-                const Expanded(
-                  flex: 3,
-                  child: StatisticWidget(
-                    title: 'Profit',
-                    price: '\$ 10,499.93',
-                    percentage: '0,33%',
-                    icon: Icons.arrow_downward_outlined,
-                    color: Colors.red,
-                  ),
-                ),
-                SizedBox(width: 10.w),
-                const Expanded(
-                  flex: 3,
-                  child: StatisticWidget(
-                    title: 'Total Views',
-                    price: '5,211,832',
-                    percentage: '0,32%',
-                    icon: Icons.arrow_upward_outlined,
-                    color: AppColors.secondary,
-                  ),
-                ),
-                SizedBox(width: 10.w),
-                const Expanded(
-                  flex: 3,
-                  child: StatisticWidget(
-                    title: 'Conversion Rate',
-                    price: '4,83%',
-                    percentage: '8,05%',
-                    icon: Icons.arrow_upward_outlined,
-                    color: AppColors.secondary,
-                  ),
-                ),
+                // Revenue Over Time
+                const Expanded(flex: 7, child: RevenueOverTime()),
+                SizedBox(width: 16.w),
+                const Expanded(flex: 4, child: SessionByCountry()),
               ],
             ),
           ),
-
-          // Padding(
-          //   padding: EdgeInsets.all(16.h),
-          //   child: Row(
-          //     children: [
-          //       // Revenue Over Time
-          //       const Expanded(flex: 7, child: RevenueOverTime()),
-          //       SizedBox(width: 16.w),
-          //       const Expanded(flex: 4, child: SessionByCountry()),
-          //     ],
-          //   ),
-          // ),
           Padding(
             padding: EdgeInsets.all(16.h),
             child: const Row(

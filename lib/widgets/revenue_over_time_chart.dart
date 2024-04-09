@@ -4,8 +4,48 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../constants/app_colors.dart';
 
-class RevenueOverTimeChart extends StatelessWidget {
+class RevenueOverTimeChart extends StatefulWidget {
   const RevenueOverTimeChart({super.key});
+
+  @override
+  State<RevenueOverTimeChart> createState() => _RevenueOverTimeChartState();
+}
+
+class _RevenueOverTimeChartState extends State<RevenueOverTimeChart>
+    with TickerProviderStateMixin {
+  late AnimationController _controller;
+  late List<Animation<double>> _animations;
+  late List<Animation<double>> _animationsTwo;
+  final List<double> yValues = [2, 2.8, 3.2, 2.8, 2.6, 3.9, 2.5, 2.8];
+  final List<double> yValuesTwo = [3, 3.8, 2.2, 3.8, 3.6, 1.9, 2, 3.8];
+
+  @override
+  void initState() {
+    super.initState();
+
+    _controller = AnimationController(
+      duration: const Duration(seconds: 2), // duration of the animation
+      vsync: this,
+    );
+
+    _animations = yValues
+        .map((yValue) =>
+            Tween<double>(begin: 0, end: yValue).animate(_controller))
+        .toList();
+
+    _animationsTwo = yValuesTwo
+        .map((yValueTwo) =>
+            Tween<double>(begin: 0, end: yValueTwo).animate(_controller))
+        .toList();
+
+    _controller.forward();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -88,90 +128,86 @@ class RevenueOverTimeChart extends StatelessWidget {
       );
     }
 
-    return LineChart(
-      LineChartData(
-        gridData: const FlGridData(show: false),
-        titlesData: FlTitlesData(
-          bottomTitles: AxisTitles(
-            sideTitles: SideTitles(
-              showTitles: true,
-              reservedSize: 32,
-              interval: 1,
-              getTitlesWidget: bottomTitleWidgets,
+    return AnimatedBuilder(
+        animation: _controller,
+        builder: (context, child) {
+          return LineChart(
+            LineChartData(
+              gridData: const FlGridData(show: false),
+              titlesData: FlTitlesData(
+                bottomTitles: AxisTitles(
+                  sideTitles: SideTitles(
+                    showTitles: true,
+                    reservedSize: 32,
+                    interval: 1,
+                    getTitlesWidget: bottomTitleWidgets,
+                  ),
+                ),
+                rightTitles: AxisTitles(
+                  sideTitles: SideTitles(
+                    showTitles: true,
+                    reservedSize: 28,
+                    interval: 1,
+                    getTitlesWidget: rightTitlesWidgets,
+                  ),
+                ),
+                leftTitles: const AxisTitles(
+                  sideTitles: SideTitles(
+                    showTitles: false,
+                  ),
+                ),
+                topTitles: const AxisTitles(
+                  sideTitles: SideTitles(
+                    showTitles: false,
+                  ),
+                ),
+              ),
+              borderData: FlBorderData(
+                border: Border(
+                  bottom: BorderSide(
+                      color: AppColors.bodyColor.withOpacity(0.2), width: 1),
+                  right: BorderSide(
+                    color: AppColors.bodyColor.withOpacity(0.2),
+                    width: 1,
+                  ),
+                  top: BorderSide.none,
+                  left: BorderSide.none,
+                ),
+              ),
+              lineBarsData: [
+                LineChartBarData(
+                  spots: _animations.asMap().entries.map((entry) {
+                    int index = entry.key;
+                    Animation<double> animation = entry.value;
+                    return FlSpot(
+                        index.toDouble(), animation.value); // animated value
+                  }).toList(),
+                  isCurved: false,
+                  color: Colors.orange,
+                  barWidth: 2,
+                  isStrokeCapRound: true,
+                  dotData: const FlDotData(show: false),
+                  belowBarData: BarAreaData(show: false),
+                ),
+                LineChartBarData(
+                  spots: _animationsTwo.asMap().entries.map((entry) {
+                    int index = entry.key;
+                    Animation<double> animation = entry.value;
+                    return FlSpot(
+                        index.toDouble(), animation.value); // animated value
+                  }).toList(),
+                  isCurved: false,
+                  color: AppColors.secondary,
+                  barWidth: 2,
+                  isStrokeCapRound: true,
+                  dotData: const FlDotData(show: false),
+                  belowBarData: BarAreaData(show: false),
+                ),
+              ],
             ),
-          ),
-          rightTitles: AxisTitles(
-            sideTitles: SideTitles(
-              showTitles: true,
-              reservedSize: 28,
-              interval: 1,
-              getTitlesWidget: rightTitlesWidgets,
-            ),
-          ),
-          leftTitles: const AxisTitles(
-            sideTitles: SideTitles(
-              showTitles: false,
-            ),
-          ),
-          topTitles: const AxisTitles(
-            sideTitles: SideTitles(
-              showTitles: false,
-            ),
-          ),
-        ),
-        borderData: FlBorderData(
-          border: Border(
-            bottom: BorderSide(
-                color: AppColors.bodyColor.withOpacity(0.2), width: 1),
-            right: BorderSide(
-              color: AppColors.bodyColor.withOpacity(0.2),
-              width: 1,
-            ),
-            top: BorderSide.none,
-            left: BorderSide.none,
-          ),
-        ),
-        lineBarsData: [
-          LineChartBarData(
-            spots: [
-              const FlSpot(1, 2),
-              const FlSpot(2, 2.8),
-              const FlSpot(3, 3.2),
-              const FlSpot(4, 2.8),
-              const FlSpot(5, 2.6),
-              const FlSpot(6, 3.9),
-              const FlSpot(7, 2.5),
-              const FlSpot(8, 2.8),
-            ],
-            isCurved: false,
-            color: Colors.orange,
-            barWidth: 2,
-            isStrokeCapRound: true,
-            dotData: const FlDotData(show: false),
-            belowBarData: BarAreaData(show: false),
-          ),
-          LineChartBarData(
-            spots: [
-              const FlSpot(1, 3),
-              const FlSpot(2, 3.8),
-              const FlSpot(3, 2.2),
-              const FlSpot(4, 3.8),
-              const FlSpot(5, 3.6),
-              const FlSpot(6, 1.9),
-              const FlSpot(7, 2),
-              const FlSpot(8, 3.8),
-            ],
-            isCurved: false,
-            color: AppColors.secondary,
-            barWidth: 2,
-            isStrokeCapRound: true,
-            dotData: const FlDotData(show: false),
-            belowBarData: BarAreaData(show: false),
-          ),
-        ],
-      ),
-      duration: const Duration(milliseconds: 2000), // Optional
-      curve: Curves.ease, // Optional
-    );
+            duration: const Duration(milliseconds: 2000), // Optional
+            curve: Curves.ease, // Optional
+          );
+        });
   }
 }

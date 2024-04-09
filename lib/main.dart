@@ -1,10 +1,16 @@
+import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'main_page.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    DevicePreview(
+      enabled: false,
+      builder: (context) => const MyApp(), // Wrap your app
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -19,8 +25,13 @@ class MyApp extends StatelessWidget {
       // Use builder only if you need to use library outside ScreenUtilInit context
       builder: (_, child) {
         return MaterialApp(
+          useInheritedMediaQuery: true,
+          locale: DevicePreview.locale(context),
+          builder: DevicePreview.appBuilder,
+          // theme: ThemeData.light(),
+          // darkTheme: ThemeData.dark(),
           debugShowCheckedModeBanner: false,
-          title: 'First Method',
+          title: 'Dashboard UI Kit',
           // You can use the library anywhere in the app even in theme
           theme: ThemeData(
             primarySwatch: Colors.blue,

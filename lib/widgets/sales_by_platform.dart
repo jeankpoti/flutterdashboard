@@ -98,7 +98,7 @@ class SalesByPlatformState extends State {
                     children: <Widget>[
                       Indicator(
                         color: Colors.blue,
-                        text: 'America',
+                        text: 'Amazon',
                         isSquare: true,
                       ),
                       SizedBox(
@@ -106,7 +106,7 @@ class SalesByPlatformState extends State {
                       ),
                       Indicator(
                         color: Colors.orange,
-                        text: 'Africa',
+                        text: 'Alibaba',
                         isSquare: true,
                       ),
                       SizedBox(
@@ -114,7 +114,7 @@ class SalesByPlatformState extends State {
                       ),
                       Indicator(
                         color: Colors.purple,
-                        text: 'Europe',
+                        text: 'Walmart',
                         isSquare: true,
                       ),
                       SizedBox(
@@ -122,7 +122,7 @@ class SalesByPlatformState extends State {
                       ),
                       Indicator(
                         color: AppColors.secondary,
-                        text: 'Asia',
+                        text: 'Ebay',
                         isSquare: true,
                       ),
                       SizedBox(

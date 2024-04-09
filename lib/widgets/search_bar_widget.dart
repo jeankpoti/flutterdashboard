@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../constants/app_colors.dart';
+import '../util/responsive.dart';
 
 class SearchbarWidget extends StatelessWidget {
   const SearchbarWidget({super.key});
@@ -10,7 +11,19 @@ class SearchbarWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
+        if (!Responsive.isDesktop(context))
+          Padding(
+            padding: EdgeInsets.only(left: 16.w),
+            child: GestureDetector(
+              onTap: () => Scaffold.of(context).openDrawer(),
+              child: Icon(
+                Icons.menu,
+                color: AppColors.bodyColor,
+              ),
+            ),
+          ),
         SizedBox(
           width: 800.w,
           height: 50.h,
@@ -58,7 +71,7 @@ class SearchbarWidget extends StatelessWidget {
             CircleAvatar(
               radius: 20.r,
               backgroundColor: Colors.orange,
-              child: Icon(
+              child: const Icon(
                 Icons.person_outline,
                 color: AppColors.primaryColor,
               ),
