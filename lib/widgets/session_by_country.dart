@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../constants/app_colors.dart';
 import '../constants/app_text_styles.dart';
@@ -13,7 +12,7 @@ class SessionByCountry extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         color: AppColors.primaryColor,
-        borderRadius: BorderRadius.circular(8.r),
+        borderRadius: BorderRadius.circular(8),
         border: Border.all(
           color: AppColors.bodyColor.withOpacity(0.2),
         ),
@@ -27,9 +26,9 @@ class SessionByCountry extends StatelessWidget {
         ],
       ),
       width: MediaQuery.of(context).size.width / 3.9,
-      height: 380.h,
+      height: 380,
       child: Padding(
-        padding: EdgeInsets.all(16.h),
+        padding: const EdgeInsets.all(16),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -43,7 +42,7 @@ class SessionByCountry extends StatelessWidget {
                       'Session by Country',
                       style: AppTextStyles.title,
                     ),
-                    SizedBox(height: 5.h),
+                    const SizedBox(height: 5),
                     Text(
                       'Showing data for Top Session',
                       style: AppTextStyles.body,
@@ -56,7 +55,7 @@ class SessionByCountry extends StatelessWidget {
                 )
               ],
             ),
-            SizedBox(height: 20.h),
+            const SizedBox(height: 20),
             const ListileWidget(
               imageUrl: 'assets/images/togo.jpg',
               countryName: 'Togo',

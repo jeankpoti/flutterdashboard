@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../constants/app_colors.dart';
 import '../constants/app_text_styles.dart';
+import '../util/responsive.dart';
 import 'revenue_over_time_chart.dart';
 
 class RevenueOverTime extends StatelessWidget {
@@ -10,10 +10,11 @@ class RevenueOverTime extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isMobile = Responsive.isMobile(context);
     return Container(
       decoration: BoxDecoration(
         color: AppColors.primaryColor,
-        borderRadius: BorderRadius.circular(8.r),
+        borderRadius: BorderRadius.circular(8),
         border: Border.all(
           color: AppColors.bodyColor.withOpacity(0.2),
         ),
@@ -27,9 +28,9 @@ class RevenueOverTime extends StatelessWidget {
         ],
       ),
       width: MediaQuery.of(context).size.width / 2,
-      height: 380.h,
+      height: 380,
       child: Padding(
-        padding: EdgeInsets.all(16.h),
+        padding: const EdgeInsets.all(16),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -47,7 +48,7 @@ class RevenueOverTime extends StatelessWidget {
                       Icons.download_outlined,
                       color: AppColors.bodyColor.withOpacity(0.5),
                     ),
-                    SizedBox(width: 10.w),
+                    const SizedBox(width: 10),
                     Icon(
                       Icons.more_horiz_outlined,
                       color: AppColors.bodyColor.withOpacity(0.5),
@@ -56,57 +57,59 @@ class RevenueOverTime extends StatelessWidget {
                 )
               ],
             ),
-            SizedBox(height: 20.h),
+            const SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.circle,
-                          color: AppColors.secondary,
-                          size: 15.r,
-                        ),
-                        SizedBox(width: 10.w),
-                        Text(
-                          'Total Revenue',
-                          style: AppTextStyles.body,
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 5.h),
-                    Padding(
-                      padding: EdgeInsets.only(left: 18.w),
-                      child: Row(
+                isMobile
+                    ? const SizedBox.shrink()
+                    : Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            '\$ 32,839.99',
-                            style: AppTextStyles.subtitle,
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              const Icon(
+                                Icons.circle,
+                                color: AppColors.secondary,
+                                size: 15,
+                              ),
+                              const SizedBox(width: 10),
+                              Text(
+                                'Total Revenue',
+                                style: AppTextStyles.body,
+                              ),
+                            ],
                           ),
-                          SizedBox(width: 10.w),
-                          Icon(
-                            Icons.circle,
-                            color: AppColors.bodyColor.withOpacity(0.5),
-                            size: 10.r,
-                          ),
-                          SizedBox(width: 10.w),
-                          Text(
-                            '55%',
-                            style: AppTextStyles.body
-                                .copyWith(fontWeight: FontWeight.bold),
+                          const SizedBox(height: 5),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 18),
+                            child: Row(
+                              children: [
+                                Text(
+                                  '\$ 32,839.99',
+                                  style: AppTextStyles.subtitle,
+                                ),
+                                const SizedBox(width: 10),
+                                Icon(
+                                  Icons.circle,
+                                  color: AppColors.bodyColor.withOpacity(0.5),
+                                  size: 10,
+                                ),
+                                const SizedBox(width: 10),
+                                Text(
+                                  '55%',
+                                  style: AppTextStyles.body
+                                      .copyWith(fontWeight: FontWeight.bold),
+                                ),
+                              ],
+                            ),
                           ),
                         ],
                       ),
-                    ),
-                  ],
-                ),
-                SizedBox(width: 30.w),
+                const SizedBox(width: 30),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -114,34 +117,34 @@ class RevenueOverTime extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Icon(
+                        const Icon(
                           Icons.circle,
                           color: Colors.orange,
-                          size: 15.r,
+                          size: 15,
                         ),
-                        SizedBox(width: 10.w),
+                        const SizedBox(width: 10),
                         Text(
                           'Total Revenue',
                           style: AppTextStyles.body,
                         ),
                       ],
                     ),
-                    SizedBox(height: 5.h),
+                    const SizedBox(height: 5),
                     Padding(
-                      padding: EdgeInsets.only(left: 18.w),
+                      padding: const EdgeInsets.only(left: 18),
                       child: Row(
                         children: [
                           Text(
                             '\$ 30,932.99',
                             style: AppTextStyles.subtitle,
                           ),
-                          SizedBox(width: 10.w),
+                          const SizedBox(width: 10),
                           Icon(
                             Icons.circle,
                             color: AppColors.bodyColor.withOpacity(0.5),
-                            size: 10.r,
+                            size: 10,
                           ),
-                          SizedBox(width: 10.w),
+                          const SizedBox(width: 10),
                           Text(
                             '45%',
                             style: AppTextStyles.body
@@ -154,10 +157,10 @@ class RevenueOverTime extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 20.h),
+            const SizedBox(height: 20),
             SizedBox(
-              width: 700.w,
-              height: 200.h,
+              width: 700,
+              height: isMobile ? 150 : 200,
               child: const RevenueOverTimeChart(),
             ),
           ],

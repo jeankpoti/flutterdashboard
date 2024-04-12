@@ -4,7 +4,7 @@ import 'package:dashboard/widgets/overview_widget.dart';
 import 'package:dashboard/widgets/sales_by_region.dart';
 import 'package:flutter/material.dart';
 
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../util/responsive.dart';
 import 'registered_users_widget.dart';
 import 'revenue_over_time.dart';
 import 'sales_by_platform.dart';
@@ -17,6 +17,9 @@ class BodyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDesktop = Responsive.isDesktop(context);
+    final isMobile = Responsive.isMobile(context);
+
     return SingleChildScrollView(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -29,7 +32,7 @@ class BodyWidget extends StatelessWidget {
           ),
 
           Padding(
-            padding: EdgeInsets.all(16.h),
+            padding: const EdgeInsets.all(16),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -39,16 +42,18 @@ class BodyWidget extends StatelessWidget {
                 ),
                 Row(
                   children: [
-                    const OverviewWidget(
-                      text: 'Customize Widget',
-                      icon: Icons.dashboard_outlined,
-                    ),
-                    SizedBox(width: 10.w),
+                    isMobile
+                        ? const SizedBox.shrink()
+                        : const OverviewWidget(
+                            text: 'Customize Widget',
+                            icon: Icons.dashboard_outlined,
+                          ),
+                    const SizedBox(width: 10),
                     const OverviewWidget(
                       text: 'Filter',
                       icon: Icons.filter_list_outlined,
                     ),
-                    SizedBox(width: 10.w),
+                    const SizedBox(width: 10),
                     const OverviewWidget(
                       text: 'Share',
                       icon: Icons.share_outlined,
@@ -61,98 +66,98 @@ class BodyWidget extends StatelessWidget {
           Divider(
             color: AppColors.bodyColor.withOpacity(0.2),
           ),
-          Padding(
-            padding: EdgeInsets.all(16.h),
-            child: SizedBox(
-              height: 150.h,
-              child: const StatisticWidget(
+          const SizedBox(
+            height: 180,
+            child: Padding(
+              padding: EdgeInsets.only(left: 8.0, right: 8, top: 16, bottom: 8),
+              child: StatisticWidget(
                 isPrice: true,
                 icon: Icons.arrow_upward_outlined,
                 color: AppColors.secondary,
               ),
             ),
-
-            //  Row(
-            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //   children: [
-            //     const Expanded(
-            //       flex: 3,
-            //       child: StatisticWidget(
-            //         isPrice: true,
-            //         title: 'Total Revenue',
-            //         price: 32499.93,
-            //         percentage: '12,95%',
-            //         icon: Icons.arrow_upward_outlined,
-            //         color: AppColors.secondary,
-            //       ),
-            //     ),
-            //     SizedBox(width: 10.w),
-            //     const Expanded(
-            //       flex: 3,
-            //       child: StatisticWidget(
-            //         isPrice: true,
-            //         title: 'Profit',
-            //         price: 12499.93,
-            //         percentage: '0,33%',
-            //         icon: Icons.arrow_downward_outlined,
-            //         color: Colors.red,
-            //       ),
-            //     ),
-            //     SizedBox(width: 10.w),
-            //     const Expanded(
-            //       flex: 3,
-            //       child: StatisticWidget(
-            //         title: 'Total Views',
-            //         price: 5211832,
-            //         percentage: '0,32%',
-            //         icon: Icons.arrow_upward_outlined,
-            //         color: AppColors.secondary,
-            //       ),
-            //     ),
-            //     SizedBox(width: 10.w),
-            //     const Expanded(
-            //       flex: 3,
-            //       child: StatisticWidget(
-            //         title: 'Conversion Rate',
-            //         price: 4.83,
-            //         percentage: '8,05%',
-            //         icon: Icons.arrow_upward_outlined,
-            //         color: AppColors.secondary,
-            //       ),
-            //     ),
-            //   ],
-            // ),
           ),
 
           Padding(
-            padding: EdgeInsets.all(16.h),
-            child: Row(
-              children: [
-                // Revenue Over Time
-                const Expanded(flex: 7, child: RevenueOverTime()),
-                SizedBox(width: 16.w),
-                const Expanded(flex: 4, child: SessionByCountry()),
-              ],
-            ),
+            padding: const EdgeInsets.all(16),
+            child: isDesktop
+                ? const Row(
+                    children: [
+                      // Revenue Over Time
+                      Expanded(flex: 7, child: RevenueOverTime()),
+                      SizedBox(width: 16),
+                      // Session By Country
+                      Expanded(flex: 4, child: SessionByCountry()),
+                    ],
+                  )
+                : const Column(
+                    children: [
+                      // Revenue Over Time
+                      SizedBox(
+                        width: double.infinity,
+                        child: Expanded(
+                          child: RevenueOverTime(),
+                        ),
+                      ),
+                      SizedBox(height: 16),
+                      // Session By Country
+                      SizedBox(
+                        width: double.infinity,
+                        child: Expanded(
+                          child: SessionByCountry(),
+                        ),
+                      ),
+                    ],
+                  ),
           ),
           Padding(
-            padding: EdgeInsets.all(16.h),
-            child: const Row(
-              children: [
-                Expanded(
-                  flex: 5,
-                  child: SalesByRegion(),
-                ),
-                Expanded(
-                  flex: 5,
-                  child: SalesByPlatform(),
-                ),
-                Expanded(
-                  flex: 5,
-                  child: RegisteredUsersWidget(),
-                ),
-              ],
-            ),
+            padding: const EdgeInsets.all(16),
+            child: !isMobile
+                ? const Row(
+                    children: [
+                      Expanded(
+                        flex: 5,
+                        child: SalesByRegion(),
+                      ),
+                      SizedBox(width: 16),
+                      Expanded(
+                        flex: 5,
+                        child: SalesByPlatform(),
+                      ),
+                      SizedBox(width: 16),
+                      Expanded(
+                        flex: 5,
+                        child: RegisteredUsersWidget(),
+                      ),
+                    ],
+                  )
+                : const Column(
+                    children: [
+                      // Sales By Region
+                      SizedBox(
+                        width: double.infinity,
+                        child: Expanded(
+                          child: SalesByRegion(),
+                        ),
+                      ),
+                      SizedBox(height: 16),
+                      // Sales By Platform
+                      SizedBox(
+                        width: double.infinity,
+                        child: Expanded(
+                          child: SalesByPlatform(),
+                        ),
+                      ),
+                      SizedBox(height: 16),
+                      // Registered Users
+                      SizedBox(
+                        width: double.infinity,
+                        child: Expanded(
+                          child: RegisteredUsersWidget(),
+                        ),
+                      ),
+                    ],
+                  ),
           )
         ],
       ),

@@ -1,8 +1,8 @@
-import 'package:dashboard/constants/app_colors.dart';
-import 'package:dashboard/constants/app_text_styles.dart';
-import 'package:dashboard/data/side_menu_data.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../constants/app_colors.dart';
+import '../constants/app_text_styles.dart';
+import '../data/side_menu_data.dart';
 
 class SideMenuWidget extends StatefulWidget {
   const SideMenuWidget({super.key});
@@ -33,11 +33,11 @@ class _SideMenuWidgetState extends State<SideMenuWidget> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: EdgeInsets.only(
-              top: 16.h,
-              left: 16.w,
-              right: 16.w,
-              bottom: 32.h,
+            padding: const EdgeInsets.only(
+              top: 16,
+              left: 16,
+              right: 16,
+              bottom: 32,
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -45,7 +45,7 @@ class _SideMenuWidgetState extends State<SideMenuWidget> {
                 Row(
                   children: [
                     const Text('LOGO'),
-                    SizedBox(width: 10.h),
+                    const SizedBox(width: 10),
                     Text(
                       'Consist',
                       style: AppTextStyles.subtitle,
@@ -59,7 +59,7 @@ class _SideMenuWidgetState extends State<SideMenuWidget> {
             ),
           ),
           Padding(
-            padding: EdgeInsets.only(left: 16.w, bottom: 16.h),
+            padding: const EdgeInsets.only(left: 16, bottom: 16),
             child: Text(
               'Main menu'.toUpperCase(),
               style: AppTextStyles.body,
@@ -75,10 +75,10 @@ class _SideMenuWidgetState extends State<SideMenuWidget> {
                     selectedIndex = index;
                   }),
                   child: Padding(
-                    padding: EdgeInsets.only(
-                      top: 5.h,
-                      left: 16.w,
-                      right: 16.w,
+                    padding: const EdgeInsets.only(
+                      top: 5,
+                      left: 16,
+                      right: 16,
                     ),
                     child: MouseRegion(
                       cursor: SystemMouseCursors.click,
@@ -92,7 +92,8 @@ class _SideMenuWidgetState extends State<SideMenuWidget> {
                         duration: const Duration(milliseconds: 300),
                         curve: Curves.easeInOut,
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(6.r)),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(6)),
                           color: isSelected && data[index].title != 'Demo Mode'
                               ? AppColors.secondary
                               : (hoverIndex == index

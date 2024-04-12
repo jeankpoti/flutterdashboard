@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../constants/app_colors.dart';
 import '../constants/app_text_styles.dart';
@@ -72,13 +71,13 @@ class _ListileWidgetState extends State<ListileWidget>
                 widget.sessionValue,
                 style: AppTextStyles.body.copyWith(fontWeight: FontWeight.bold),
               ),
-              SizedBox(width: 5.w),
+              const SizedBox(width: 5),
               Icon(
                 Icons.circle,
                 color: AppColors.bodyColor,
-                size: 10.r,
+                size: 10,
               ),
-              SizedBox(width: 5.w),
+              const SizedBox(width: 5),
               Text(
                 widget.percentage,
                 style: AppTextStyles.body.copyWith(fontWeight: FontWeight.bold),
@@ -91,10 +90,10 @@ class _ListileWidgetState extends State<ListileWidget>
           animation: _controller,
           builder: (context, child) {
             return Container(
-              height: 8.h, // adjust as needed
+              height: 8, // adjust as needed
               width: double.infinity,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8.r),
+                borderRadius: BorderRadius.circular(8),
                 gradient: LinearGradient(
                   colors: [
                     AppColors.secondary,

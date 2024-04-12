@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'util/responsive.dart';
 import 'widgets/body_widget.dart';
@@ -15,9 +14,9 @@ class MainPage extends StatelessWidget {
     return Scaffold(
       drawer: isDesktop
           ? null
-          : SizedBox(
-              width: 350.w,
-              child: const SideMenuWidget(),
+          : const SizedBox(
+              width: 350,
+              child: SideMenuWidget(),
             ),
       body: Row(
         children: [

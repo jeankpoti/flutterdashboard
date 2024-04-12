@@ -2,7 +2,6 @@ import 'package:dashboard/constants/app_colors.dart';
 import 'package:dashboard/constants/app_text_styles.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'imdicator.dart';
 
@@ -19,10 +18,10 @@ class SalesByPlatformState extends State {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 350.h,
+      height: 350,
       decoration: BoxDecoration(
         color: AppColors.primaryColor,
-        borderRadius: BorderRadius.circular(8.r),
+        borderRadius: BorderRadius.circular(8),
         border: Border.all(
           color: AppColors.bodyColor.withOpacity(0.2),
         ),
@@ -40,13 +39,15 @@ class SalesByPlatformState extends State {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: EdgeInsets.only(left: 16.w, top: 16.h, right: 16.w),
+              padding: const EdgeInsets.only(left: 16, top: 16, right: 16),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    'Sales by e-commerce platform',
-                    style: AppTextStyles.subtitle,
+                  Flexible(
+                    child: Text(
+                      'Sales by e-commerce platform',
+                      style: AppTextStyles.subtitle,
+                    ),
                   ),
                   Icon(
                     Icons.more_horiz_outlined,

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../constants/app_colors.dart';
 import '../constants/app_text_styles.dart';
@@ -59,97 +58,190 @@ class _StatisticWidgetState extends State<StatisticWidget>
   @override
   Widget build(BuildContext context) {
     bool isMobile = Responsive.isMobile(context);
-    return GridView.builder(
-      itemCount: StatisticData.statisticItems.length,
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: isMobile ? 2 : 4,
-        crossAxisSpacing: 15,
-        mainAxisSpacing: 1.0,
-        mainAxisExtent: 150.h,
-      ),
-      itemBuilder: (context, index) {
-        var statisticItems = StatisticData.statisticItems;
-        return Container(
-          width: 280.w,
-          height: 150.h,
-          decoration: BoxDecoration(
-            color: AppColors.primaryColor,
-            borderRadius: BorderRadius.circular(8.r),
-            border: Border.all(
-              color: AppColors.bodyColor.withOpacity(0.2),
-            ),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey.withOpacity(0.2),
-                spreadRadius: 1,
-                blurRadius: 2,
-                offset: const Offset(0, 1),
-              ),
-            ],
-          ),
-          child: Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: 16.w,
-              vertical: 16.h,
-            ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  statisticItems[index].title,
-                  style: AppTextStyles.body,
-                ),
-                Text(
-                  widget.isPrice
-                      ? '\$${_animation.value.toStringAsFixed(2)}'
-                      : _animation.value.toStringAsFixed(2), // animated value
-                  style: AppTextStyles.title.copyWith(
-                    fontSize: 30.sp,
-                  ),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(
-                      height: 30.h,
-                      decoration: BoxDecoration(
-                        color: widget.color.withOpacity(0.2),
-                        borderRadius: BorderRadius.circular(8.r),
+    return isMobile
+        ? ListView.builder(
+            itemCount: StatisticData.statisticItems.length,
+            scrollDirection: Axis.horizontal,
+            itemBuilder: (context, index) {
+              var statisticItems = StatisticData.statisticItems;
+              return Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: Container(
+                  width: 280,
+                  height: 150,
+                  decoration: BoxDecoration(
+                    color: AppColors.primaryColor,
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(
+                      color: AppColors.bodyColor.withOpacity(0.2),
+                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.2),
+                        spreadRadius: 1,
+                        blurRadius: 2,
+                        offset: const Offset(0, 1),
                       ),
-                      child: TextButton.icon(
-                        onPressed: () {},
-                        icon: Icon(
-                          widget.icon,
-                          size: 14.sp,
-                          color: widget.color,
+                    ],
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 16,
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          statisticItems[index].title,
+                          style: AppTextStyles.body,
                         ),
-                        label: Text(
-                          statisticItems[index].percentage,
-                          style: AppTextStyles.body.copyWith(
-                            color: widget.color,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 12.sp,
+                        Text(
+                          widget.isPrice
+                              ? '\$${_animation.value.toStringAsFixed(2)}'
+                              : _animation.value
+                                  .toStringAsFixed(2), // animated value
+                          style: AppTextStyles.title.copyWith(
+                            fontSize: 30,
                           ),
                         ),
-                      ),
-                    ),
-                    SizedBox(width: 10.w),
-                    Flexible(
-                      child: Text(
-                        'Compared to last month',
-                        style: AppTextStyles.body.copyWith(
-                          fontSize: 12.sp,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Container(
+                              height: 30,
+                              decoration: BoxDecoration(
+                                color: widget.color.withOpacity(0.2),
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              child: TextButton.icon(
+                                onPressed: () {},
+                                icon: Icon(
+                                  widget.icon,
+                                  size: 14,
+                                  color: widget.color,
+                                ),
+                                label: Text(
+                                  statisticItems[index].percentage,
+                                  style: AppTextStyles.body.copyWith(
+                                    color: widget.color,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 12,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            const SizedBox(width: 10),
+                            Flexible(
+                              child: Text(
+                                'Compared to last month',
+                                style: AppTextStyles.body.copyWith(
+                                  fontSize: 12,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-                      ),
+                      ],
+                    ),
+                  ),
+                ),
+              );
+            },
+          )
+        : GridView.builder(
+            itemCount: StatisticData.statisticItems.length,
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 4,
+              crossAxisSpacing: 15,
+              mainAxisSpacing: 1.0,
+              mainAxisExtent: 150,
+            ),
+            itemBuilder: (context, index) {
+              var statisticItems = StatisticData.statisticItems;
+              return Container(
+                width: 280,
+                height: 150,
+                decoration: BoxDecoration(
+                  color: AppColors.primaryColor,
+                  borderRadius: BorderRadius.circular(8),
+                  border: Border.all(
+                    color: AppColors.bodyColor.withOpacity(0.2),
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.2),
+                      spreadRadius: 1,
+                      blurRadius: 2,
+                      offset: const Offset(0, 1),
                     ),
                   ],
                 ),
-              ],
-            ),
-          ),
-        );
-      },
-    );
+                child: Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 16,
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        statisticItems[index].title,
+                        style: AppTextStyles.body,
+                      ),
+                      Text(
+                        widget.isPrice
+                            ? '\$${_animation.value.toStringAsFixed(2)}'
+                            : _animation.value
+                                .toStringAsFixed(2), // animated value
+                        style: AppTextStyles.title.copyWith(
+                          fontSize: 30,
+                        ),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                            height: 30,
+                            decoration: BoxDecoration(
+                              color: widget.color.withOpacity(0.2),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: TextButton.icon(
+                              onPressed: () {},
+                              icon: Icon(
+                                widget.icon,
+                                size: 14,
+                                color: widget.color,
+                              ),
+                              label: Text(
+                                statisticItems[index].percentage,
+                                style: AppTextStyles.body.copyWith(
+                                  color: widget.color,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 12,
+                                ),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(width: 10),
+                          Flexible(
+                            child: Text(
+                              'Compared to last month',
+                              style: AppTextStyles.body.copyWith(
+                                fontSize: 12,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            },
+          );
   }
 }

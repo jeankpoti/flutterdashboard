@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter/widgets.dart';
 
 import '../constants/app_colors.dart';
 import '../util/responsive.dart';
@@ -9,32 +9,33 @@ class SearchbarWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isMobile = Responsive.isMobile(context);
+    final width = MediaQuery.of(context).size.width;
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         if (!Responsive.isDesktop(context))
           Padding(
-            padding: EdgeInsets.only(left: 16.w),
+            padding: const EdgeInsets.only(left: 16),
             child: GestureDetector(
               onTap: () => Scaffold.of(context).openDrawer(),
-              child: Icon(
+              child: const Icon(
                 Icons.menu,
                 color: AppColors.bodyColor,
               ),
             ),
           ),
         SizedBox(
-          width: 800.w,
-          height: 50.h,
+          width: width * 0.6,
+          height: 50,
           child: Padding(
-            padding: EdgeInsets.all(8.h),
+            padding: const EdgeInsets.all(8),
             child: TextField(
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 hintText: 'Search anything here...',
-                hintStyle:
-                    TextStyle(color: AppColors.bodyColor, fontSize: 16.sp),
-                prefixIcon: const Icon(
+                hintStyle: TextStyle(color: AppColors.bodyColor, fontSize: 16),
+                prefixIcon: Icon(
                   Icons.search,
                   color: AppColors.bodyColor,
                 ),
@@ -44,45 +45,64 @@ class SearchbarWidget extends StatelessWidget {
             ),
           ),
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            const Icon(
-              Icons.download_outlined,
-              color: AppColors.bodyColor,
-            ),
-            SizedBox(width: 10.w),
-            const Icon(
-              Icons.upload_outlined,
-              color: AppColors.bodyColor,
-            ),
-            SizedBox(width: 10.w),
-            const Icon(
-              Icons.settings_outlined,
-              color: AppColors.bodyColor,
-            ),
-            SizedBox(
-              height: 40.h,
-              child: VerticalDivider(
-                color: AppColors.bodyColor.withOpacity(0.2),
-                thickness: 1,
+        if (MediaQuery.of(context).size.width >= 1255)
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              const Icon(
+                Icons.download_outlined,
+                color: AppColors.bodyColor,
               ),
-            ),
-            CircleAvatar(
-              radius: 20.r,
-              backgroundColor: Colors.orange,
-              child: const Icon(
-                Icons.person_outline,
-                color: AppColors.primaryColor,
+              const SizedBox(width: 10),
+              const Icon(
+                Icons.upload_outlined,
+                color: AppColors.bodyColor,
               ),
-            ),
-            const Icon(
-              Icons.arrow_drop_down_outlined,
-              color: AppColors.bodyColor,
-            ),
-            SizedBox(width: 16.w),
-          ],
-        ),
+              const SizedBox(width: 10),
+              const Icon(
+                Icons.settings_outlined,
+                color: AppColors.bodyColor,
+              ),
+              SizedBox(
+                height: 40,
+                child: VerticalDivider(
+                  color: AppColors.bodyColor.withOpacity(0.2),
+                  thickness: 1,
+                ),
+              ),
+              const CircleAvatar(
+                radius: 20,
+                backgroundColor: Colors.orange,
+                child: Icon(
+                  Icons.person_outline,
+                  color: AppColors.primaryColor,
+                ),
+              ),
+              const Icon(
+                Icons.arrow_drop_down_outlined,
+                color: AppColors.bodyColor,
+              ),
+              const SizedBox(width: 16),
+            ],
+          )
+        else if (isMobile)
+          const Row(
+            children: [
+              CircleAvatar(
+                radius: 20,
+                backgroundColor: Colors.orange,
+                child: Icon(
+                  Icons.person_outline,
+                  color: AppColors.primaryColor,
+                ),
+              ),
+              Icon(
+                Icons.arrow_drop_down_outlined,
+                color: AppColors.bodyColor,
+              ),
+            ],
+          ),
+        const SizedBox(width: 16),
       ],
     );
   }

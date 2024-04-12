@@ -1,6 +1,5 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../constants/app_colors.dart';
 
@@ -52,7 +51,7 @@ class _RevenueOverTimeChartState extends State<RevenueOverTimeChart>
     Widget bottomTitleWidgets(double value, TitleMeta meta) {
       TextStyle style = TextStyle(
         fontWeight: FontWeight.bold,
-        fontSize: 12.sp,
+        fontSize: 12,
         color: AppColors.bodyColor.withOpacity(0.5),
       );
       Widget text;
@@ -98,7 +97,7 @@ class _RevenueOverTimeChartState extends State<RevenueOverTimeChart>
     Widget rightTitlesWidgets(double value, TitleMeta meta) {
       TextStyle style = TextStyle(
         fontWeight: FontWeight.bold,
-        fontSize: 12.sp,
+        fontSize: 12,
         color: AppColors.bodyColor.withOpacity(0.5),
       );
       Widget text;
