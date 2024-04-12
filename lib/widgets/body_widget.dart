@@ -4,6 +4,7 @@ import 'package:dashboard/widgets/overview_widget.dart';
 import 'package:dashboard/widgets/sales_by_region.dart';
 import 'package:flutter/material.dart';
 
+import '../data/statistic_data.dart';
 import '../util/responsive.dart';
 import 'registered_users_widget.dart';
 import 'revenue_over_time.dart';
@@ -66,15 +67,48 @@ class BodyWidget extends StatelessWidget {
           Divider(
             color: AppColors.bodyColor.withOpacity(0.2),
           ),
-          const SizedBox(
+          SizedBox(
             height: 180,
             child: Padding(
               padding: EdgeInsets.only(left: 8.0, right: 8, top: 16, bottom: 8),
-              child: StatisticWidget(
-                isPrice: true,
-                icon: Icons.arrow_upward_outlined,
-                color: AppColors.secondary,
-              ),
+              child: isMobile
+                  ? ListView.builder(
+                      itemCount: StatisticData.statisticItems.length,
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (context, index) {
+                        var statisticItems = StatisticData.statisticItems;
+
+                        return StatisticWidget(
+                          title: statisticItems[index].title,
+                          price: statisticItems[index].price,
+                          percentage: statisticItems[index].percentage,
+                          isPrice: statisticItems[index].isPrice,
+                          icon: Icons.arrow_upward_outlined,
+                          color: AppColors.secondary,
+                        );
+                      },
+                    )
+                  : GridView.builder(
+                      itemCount: StatisticData.statisticItems.length,
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 4,
+                        crossAxisSpacing: 15,
+                        mainAxisSpacing: 1.0,
+                        mainAxisExtent: 150,
+                      ),
+                      itemBuilder: (context, index) {
+                        var statisticItems = StatisticData.statisticItems;
+                        return StatisticWidget(
+                          title: statisticItems[index].title,
+                          price: statisticItems[index].price,
+                          percentage: statisticItems[index].percentage,
+                          isPrice: statisticItems[index].isPrice,
+                          icon: Icons.arrow_upward_outlined,
+                          color: AppColors.secondary,
+                        );
+                      },
+                    ),
             ),
           ),
 

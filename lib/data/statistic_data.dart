@@ -28,7 +28,7 @@ class StatisticData {
       percentage: '0,32%',
       icon: Icons.arrow_upward_outlined,
       color: AppColors.secondary,
-      isPrice: true,
+      isPrice: false,
     ),
     const StatisticModel(
       title: 'Conversion Rate',
@@ -36,7 +36,7 @@ class StatisticData {
       percentage: '8,05%',
       icon: Icons.arrow_upward_outlined,
       color: AppColors.secondary,
-      isPrice: true,
+      isPrice: false,
     ),
   ];
 }
