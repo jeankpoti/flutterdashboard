@@ -1,14 +1,10 @@
 import 'package:dashboard/constants/app_text_styles.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'dart:math' as math;
 
 import '../constants/app_colors.dart';
-import '../util/responsive.dart';
 
 class RegisteredUsersWidget extends StatefulWidget {
-  const RegisteredUsersWidget({Key? key}) : super(key: key);
+  const RegisteredUsersWidget({super.key});
 
   @override
   State<RegisteredUsersWidget> createState() => _RegisteredUsersWidgetState();
@@ -45,7 +41,6 @@ class _RegisteredUsersWidgetState extends State<RegisteredUsersWidget>
 
   @override
   Widget build(BuildContext context) {
-    final isMobile = Responsive.isMobile(context);
     return Container(
       height: 350,
       decoration: BoxDecoration(

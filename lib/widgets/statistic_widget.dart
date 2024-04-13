@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../constants/app_colors.dart';
 import '../constants/app_text_styles.dart';
-import '../data/statistic_data.dart';
 import '../util/responsive.dart';
 
 class StatisticWidget extends StatefulWidget {
@@ -57,11 +56,13 @@ class _StatisticWidgetState extends State<StatisticWidget>
 
   @override
   Widget build(BuildContext context) {
+    final isDesktop = Responsive.isDesktop(context);
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0),
       child: Container(
         width: 280,
-        height: 150,
+        height: 160,
         decoration: BoxDecoration(
           color: AppColors.primaryColor,
           borderRadius: BorderRadius.circular(8),
@@ -82,60 +83,62 @@ class _StatisticWidgetState extends State<StatisticWidget>
             horizontal: 16,
             vertical: 16,
           ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                widget.title,
-                style: AppTextStyles.body,
-              ),
-              Text(
-                widget.isPrice
-                    ? '\$${_animation.value.toStringAsFixed(2)}'
-                    : _animation.value.toStringAsFixed(2), // animated value
-                style: AppTextStyles.title.copyWith(
-                  fontSize: 30,
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  widget.title,
+                  style: AppTextStyles.body,
                 ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    height: 30,
-                    decoration: BoxDecoration(
-                      color: widget.color.withOpacity(0.2),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: TextButton.icon(
-                      onPressed: () {},
-                      icon: Icon(
-                        widget.icon,
-                        size: 14,
-                        color: widget.color,
+                Text(
+                  widget.isPrice
+                      ? '\$${_animation.value.toStringAsFixed(2)}'
+                      : _animation.value.toStringAsFixed(2), // animated value
+                  style: AppTextStyles.title.copyWith(
+                    fontSize: 30,
+                  ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      height: 30,
+                      decoration: BoxDecoration(
+                        color: widget.color.withOpacity(0.2),
+                        borderRadius: BorderRadius.circular(8),
                       ),
-                      label: Text(
-                        widget.percentage,
-                        style: AppTextStyles.body.copyWith(
+                      child: TextButton.icon(
+                        onPressed: () {},
+                        icon: Icon(
+                          widget.icon,
+                          size: 14,
                           color: widget.color,
-                          fontWeight: FontWeight.bold,
+                        ),
+                        label: Text(
+                          widget.percentage,
+                          style: AppTextStyles.body.copyWith(
+                            color: widget.color,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 12,
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 10),
+                    Flexible(
+                      child: Text(
+                        'Compared to last month',
+                        style: AppTextStyles.body.copyWith(
                           fontSize: 12,
                         ),
                       ),
                     ),
-                  ),
-                  const SizedBox(width: 10),
-                  Flexible(
-                    child: Text(
-                      'Compared to last month',
-                      style: AppTextStyles.body.copyWith(
-                        fontSize: 12,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ],
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),

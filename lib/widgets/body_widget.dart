@@ -70,7 +70,8 @@ class BodyWidget extends StatelessWidget {
           SizedBox(
             height: 180,
             child: Padding(
-              padding: EdgeInsets.only(left: 8.0, right: 8, top: 16, bottom: 8),
+              padding: const EdgeInsets.only(
+                  left: 8.0, right: 8, top: 16, bottom: 8),
               child: isMobile
                   ? ListView.builder(
                       itemCount: StatisticData.statisticItems.length,

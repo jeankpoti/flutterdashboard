@@ -72,7 +72,7 @@ class _ListileWidgetState extends State<ListileWidget>
                 style: AppTextStyles.body.copyWith(fontWeight: FontWeight.bold),
               ),
               const SizedBox(width: 5),
-              Icon(
+              const Icon(
                 Icons.circle,
                 color: AppColors.bodyColor,
                 size: 10,
