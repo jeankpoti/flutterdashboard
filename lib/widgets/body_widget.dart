@@ -130,17 +130,13 @@ class BodyWidget extends StatelessWidget {
                       // Revenue Over Time
                       SizedBox(
                         width: double.infinity,
-                        child: Expanded(
-                          child: RevenueOverTime(),
-                        ),
+                        child: RevenueOverTime(),
                       ),
                       SizedBox(height: 16),
                       // Session By Country
                       SizedBox(
                         width: double.infinity,
-                        child: Expanded(
-                          child: SessionByCountry(),
-                        ),
+                        child: SessionByCountry(),
                       ),
                     ],
                   ),
@@ -171,25 +167,19 @@ class BodyWidget extends StatelessWidget {
                       // Sales By Region
                       SizedBox(
                         width: double.infinity,
-                        child: Expanded(
-                          child: SalesByRegion(),
-                        ),
+                        child: SalesByRegion(),
                       ),
                       SizedBox(height: 16),
                       // Sales By Platform
                       SizedBox(
                         width: double.infinity,
-                        child: Expanded(
-                          child: SalesByPlatform(),
-                        ),
+                        child: SalesByPlatform(),
                       ),
                       SizedBox(height: 16),
                       // Registered Users
                       SizedBox(
                         width: double.infinity,
-                        child: Expanded(
-                          child: RegisteredUsersWidget(),
-                        ),
+                        child: RegisteredUsersWidget(),
                       ),
                     ],
                   ),
