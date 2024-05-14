@@ -1,5 +1,7 @@
 # This is a fully responsive flutter web app
 
+Inspiration: https://dribbble.com/shots/23053900-Sales-Marketing-Dashboard
+
 
 ## Desktop version
 ![dashboard](https://github.com/jeankpoti/sale-marketing-dashboard/assets/23018022/56e3624c-4b10-4faf-a1e3-2e54c85902ee)
